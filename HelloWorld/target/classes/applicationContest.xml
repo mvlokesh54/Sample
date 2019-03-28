@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+    http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+<tx:annotation-driven transaction-manager="transation"/>
+<!-- Driver manager datasource properties -->
+<bean id="datasource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+<property name="url" value="jdbc:mysql://localhost:3306/test"/>
+<property name="username" value="root"/>
+<property name="password" value="mysql"/>
+</bean>
+<!-- Session Factory properties-->
+<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+<property name="dataSource" ref="datasource"/>
+<property name="mappingResources">
+<list>
+<value>Employee.hbm.xml</value>
+</list>
+</property>
+
+<!-- Hibernate configarations Properties -->
+<property name="hibernateProperties">
+<props>
+<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+<prop key="show_sql">true</prop>
+<prop key="hbm2ddl.auto">update</prop>
+</props>
+</property>
+
+</bean>
+<!-- Transation properties -->
+<bean id="transation" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+<property name="sessionFactory" ref="sessionFactory"/>
+</bean>
+
+<!-- Hibernate Template properties -->
+<bean id="hibernateTemplate" class="org.springframework.orm.hibernate4.HibernateTemplate">
+<property name="sessionFactory" ref="sessionFactory"/>
+<property name="checkWriteOperations" value="false"/>
+</bean>
+
+<!-- Dao properties -->
+<bean id="empDao" class="com.durgasoft.dao.EmployeeDaoImpl">
+<property name="hibernateTemplate" ref="hibernateTemplate"/>
+</bean>
+</beans>
