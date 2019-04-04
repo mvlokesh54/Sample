@@ -1,5 +1,7 @@
 package string;
 
+import java.util.StringTokenizer;
+
 public class StringExample {
 
 	/**
@@ -13,33 +15,41 @@ public class StringExample {
 		// TODO Auto-generated method stub
 		
 		
-		String s= "sachin";
-		String s1= "Tendulkar";
-		String s2= "sachin";
-		String s3 = new String("sachin");
+		String a="lokesh";
+		String b="Deva Raju";
+		String c="lokesh";
+		String d = new String("lokesh");
 		
-		//1)String are compared based on content and reference
+		System.out.println("String Equals : "+(a.equals(d)));//false
+		System.out.println("String   == "+(a==d));
+		System.out.println("String compareTo : "+(c.compareTo(a)));
+		System.out.println("Length :"+(b.length()));
+		System.out.println("CharAt :"+(a.charAt(2)));;
+		System.out.println("SubSring with 1 parameter : "+(a.substring(3)));;
+		System.out.println("SubSring with 2 parameter : "+(a.substring(1, 3)));
+		/* 
+		 * 1) sub string start with 0
+		 * 2) End index is excluded
+		 * */
+		a.toUpperCase();
+		a.toLowerCase();
+		b.trim();//DevaRaju
+		System.out.println(" Replace only : "+(b.replace("Deva Raju", "lokesh")));
+		System.out.println("ReplaceALL  : "+(a.replaceAll("lok  ", "M")));
+		a.concat(b);
+		System.out.println("Concate"+a.concat(b));
+		System.out.println("String concat + "+(8+8+a+b+8+8));
 		
-		System.out.println(s==s1);
-		System.out.println(s==s2);
-		System.out.println(s==s3);
+		//String Tokenizer
 		
-		System.out.println(s.equals(s1));
-		System.out.println(s.equals(s2));
-		
-		System.out.println(s.compareTo(s1));
-		System.out.println(s1.compareTo(s2));
+String		msg="lokesh is very bad boy";
 
-		s=s.concat(s1);
-		System.out.println(s);
-		
-		/**
-		 *2) String Concatenation
-		 *2 way:
-		 *1)By + operator
-		 *2)By  concat()
-		 */
-		
+StringTokenizer st= new StringTokenizer(msg," ");
+while(st.hasMoreTokens())
+{
+	System.out.println("Tokenizer : "+st.nextToken());
+}
+
 		
 		
 		
